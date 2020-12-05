@@ -47,7 +47,8 @@ bool test_line1(const string inp) {
 		int char_in_password = count(line.password.begin(), line.password.end(), line.letter);
 		return line.int1 <= char_in_password && char_in_password <= line.int2;
 	} else {
-		cout << inp << " doesn't match pattern... Aborting test" << endl;
+		cout << inp << " doesn't match pattern... Returning false" << endl;
+		return false;
 	}
 }
 
@@ -61,7 +62,8 @@ bool test_line2(const string inp) {
 		bool pos2_is_letter = line.password.at(line.int2 - 1) == line.letter;
 		return pos1_is_letter != pos2_is_letter;
 	} else {
-		cout << inp << " doesn't match pattern... Aborting test" << endl;
+		cout << inp << " doesn't match pattern... Returning false" << endl;
+		return false;
 	}
 }
 
@@ -74,10 +76,13 @@ int main() {
 		if (test_line1(line)) {
 			count1 += 1;
 		}
+	}
+	cout << "Passwords passing #1: " << count1 << endl;
+
+	for (string line : lines) {
 		if (test_line2(line)) {
 			count2 += 1;
 		}
 	}
-	cout << "Passwords passing #1: " << count1 << endl;
 	cout << "Passwords passing #2: " << count2 << endl;
 }

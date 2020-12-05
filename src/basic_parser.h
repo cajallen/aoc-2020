@@ -12,9 +12,7 @@ vector<string> parse_list(const string file_name) {
 	vector<string> vec{};
 
 	if (!input) {
-		cout << "Error while opening file...";
-		cin.ignore();
-		return vec;
+		throw new invalid_argument("Invalid file name: " + file_name);
 	}
 
 	while (getline(input, line)) {
