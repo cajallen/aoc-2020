@@ -1,13 +1,16 @@
 CC = g++
 CFLAGS = -O2
-BUILD_DIR = ./build
-SRC_DIR = ./src
-
 
 %:
-	$(CC) -o build/$@ src/$@.cpp $(CFLAGS)
-	./build/$@
+	@mkdir -p build
+	@echo Compiling...
+	@make build/$@.o --no-print-directory
+	@echo Running...
+	@./build/$@.o
+
+build/%.o: src/%.cpp
+	@$(CC) -o $@ $^ $(CFLAGS)
 
 clean:
-	rm -rf build
-	mkdir -p build
+	@echo Cleaning...
+	@rm -rf build
