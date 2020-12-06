@@ -36,6 +36,6 @@ int n2approach2() {
 }
 
 int main() {
-	cout << "Answer #1: " << n2approach1() << endl;
-	cout << "Answer #2: " << n2approach2() << endl;
+	cout << "#1: Answer: " << n2approach1() << endl;
+	cout << "#2: Answer: " << n2approach2() << endl;
 }

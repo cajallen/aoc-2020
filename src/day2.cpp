@@ -77,12 +77,12 @@ int main() {
 			count1 += 1;
 		}
 	}
-	cout << "Passwords passing #1: " << count1 << endl;
+	cout << "#1: Passwords passing: " << count1 << endl;
 
 	for (string line : lines) {
 		if (test_line2(line)) {
 			count2 += 1;
 		}
 	}
-	cout << "Passwords passing #2: " << count2 << endl;
+	cout << "#2: Passwords passing: " << count2 << endl;
 }

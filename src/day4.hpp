@@ -14,25 +14,36 @@
 
 using namespace std;
 
-enum key { 
+enum Key { 
 	byr, 
 	eyr, 
 	iyr, 
 	hgt,
+	pid,
 	ecl, 
 	hcl,
-	pid,
 	hgt_unit
 };
 
-const map<key, regex> regexes{
+map<Key, regex> regex_keys {
+	{byr, regex("byr:")},
+	{eyr, regex("eyr:")},
+	{iyr, regex("iyr:")},
+	{hgt, regex("hgt:")},
+	{pid, regex("pid:")},
+	{ecl, regex("ecl:")},
+	{hcl, regex("hcl:")},
+	{hgt_unit, regex("hgt:")}
+};
+
+map<Key, regex> regex_rules {
 	{byr, regex("byr:(\\d{4})")},
 	{eyr, regex("eyr:(\\d{4})")},
 	{iyr, regex("iyr:(\\d{4})")},
 	{hgt, regex("hgt:(\\d+)((cm)|(in))")},
+	{pid, regex("pid:(\\d{9})(?!\\d)")},
 	{ecl, regex("ecl:(amb|blu|brn|gry|grn|hzl|oth)")},
 	{hcl, regex("hcl:(#[a-z0-9]{6})")},
-	{pid, regex("pid:(\\d{9})(?!\\d)")},
 	{hgt_unit, regex("hgt:\\d+((cm)|(in))")}
 };
 
@@ -40,15 +51,22 @@ class Passport {
  public:
 	Passport(string line);
 
-	void Set(key member, string value);
+	void Set(Key member, string value);
 
-	int byr_, cid_, eyr_, iyr_, hgt_;
-	string ecl_, hcl_, pid_, hgt_unit_;
-	bool valid = false;
+	long cid_ = -1;
+	long byr_ = -1;
+	long eyr_ = -1;
+	long iyr_ = -1;
+	long hgt_ = -1;
+	long pid_ = -1;
+	string ecl_ = "";
+	string hcl_ = "";
+	string hgt_unit_ = "";
+	bool valid_keys = false;
+	bool valid_values = false;
 
  private:
-	void initialize();
-	bool validate();
+	void validate();
 };
 
 ostream& operator << (ostream& os, const Passport& passport);

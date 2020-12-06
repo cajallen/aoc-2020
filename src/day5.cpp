@@ -58,7 +58,7 @@ int main() {
 		seats.push_back(Seat(line));
 		highest_id = seats.back().id > highest_id ? seats.back().id : highest_id;
 	}
-	cout << "Highest ID: " << highest_id << endl;
+	cout << "#1: Highest ID for: " << highest_id << endl;
 
 	// part 2
 	bool unfilled_seats[max_seat] = {};
@@ -67,7 +67,7 @@ int main() {
 	}
 	for (int i = 0; i < max_seat - 2; i++) {
 		if (unfilled_seats[i] && !unfilled_seats[i + 1] && unfilled_seats[i + 2]) {
-			cout << "Looks like " << i + 1 << " is unfilled." << endl;
+			cout << "#2: Looks like " << i + 1 << " is unfilled." << endl;
 		} 
 	}
 }

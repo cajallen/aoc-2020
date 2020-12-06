@@ -51,6 +51,6 @@ int main() {
 		sum_any += count_line_any(line);
 		sum_every += count_line_every(line);
 	}
-	cout << "Count line any sum: " << sum_any << endl;
-	cout << "Count line every sum: " << sum_every << endl;
+	cout << "#1: any sum: " << sum_any << endl;
+	cout << "#2: every sum: " << sum_every << endl;
 }
