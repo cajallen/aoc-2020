@@ -5,7 +5,7 @@
 
 using namespace std;
 
-vector<string> parse_list(const string file_name) {
+vector<string> parse_list(const string file_name, char delim = '\n') {
 	ifstream input(file_name);
 	string line;
 
@@ -15,7 +15,7 @@ vector<string> parse_list(const string file_name) {
 		throw new invalid_argument("Invalid file name: " + file_name);
 	}
 
-	while (getline(input, line)) {
+	while (getline(input, line, delim)) {
 		if (line.back() == '\r') {
 			line.pop_back();
 		}
