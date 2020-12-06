@@ -1,9 +1,7 @@
 #include "day4.hpp"
 
 int main() {
-	string input = parse_list(INPUT_FILE, '\0').front();
-
-	vector<string> lines = parse_to_lines(input);
+	vector<string> lines = parse_double_newline_delimited(INPUT_FILE);
 
 	int valid_passports = 0;
 	for (string line : lines) {
@@ -13,22 +11,6 @@ int main() {
 		}
 	}
 	cout << "Valid passports: " << valid_passports << endl;
-}
-
-
-vector<string> parse_to_lines(string input) {
-	regex pattern1("(.)\\s\\s(.)");
-	regex pattern2("(.+)");
-	smatch matches;
-
-	input = regex_replace(input, pattern1, "$1 $2");
-
-	vector<string> lines{};
-	while (regex_search(input, matches, pattern2)) {
-		lines.push_back(matches[1]);
-		input = matches.suffix().str();
-	}
-	return lines;
 }
 
 
@@ -113,8 +95,4 @@ ostream& operator << (ostream& os, const Passport& passport) {
 	os << ", ecl:" << passport.ecl_;
 	os << "}";
 	return os;
-}
-
-bool in_range(int v, int min, int max) {
-	return min <= v	&& v <= max;
 }

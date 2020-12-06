@@ -3,7 +3,7 @@
 #include <iostream>
 #include <bitset>
 #include <cmath>
-#include "basic_parser.h"
+#include "basic_parser.hpp"
 
 using namespace std;
 
@@ -61,7 +61,7 @@ int main() {
 	cout << "Highest ID: " << highest_id << endl;
 
 	// part 2
-	bool unfilled_seats[max_seat];
+	bool unfilled_seats[max_seat] = {};
 	for (Seat seat : seats) {
 		unfilled_seats[seat.id] = true;
 	}

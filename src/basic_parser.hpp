@@ -1,27 +1,34 @@
+#ifndef BASIC_PARSER_H_
+#define BASIC_PARSER_H_
+
 #include <fstream>
 #include <sstream>
 #include <string>
 #include <vector>
+#include <regex>
 
 using namespace std;
+
+
+static inline void rtrim(string &s) {
+    s.erase(s.find_last_not_of(" \n\r\t\f\v") + 1);
+}
 
 vector<string> parse_list(const string file_name, char delim = '\n') {
 	ifstream input(file_name);
 	string line;
 
-	vector<string> vec{};
+	vector<string> lines{};
 
 	if (!input) {
 		throw new invalid_argument("Invalid file name: " + file_name);
 	}
 
 	while (getline(input, line, delim)) {
-		if (line.back() == '\r') {
-			line.pop_back();
-		}
-		vec.push_back(line);
+		rtrim(line);
+		lines.push_back(line);
 	}
-	return vec;
+	return lines;
 }
 
 vector<int> parse_int_list(const string file_name) {
@@ -49,3 +56,19 @@ vector<vector<bool>> parse_bit_grid(const string file_name) {
 	}
 	return grid;
 }
+
+vector<string> parse_double_newline_delimited(const string file_name) {
+	string input = parse_list(file_name, '\0').front();
+	input = regex_replace(input, regex("(.)\\r\\n"), "$1 ");
+	
+	istringstream iss(input);
+	vector<string> lines{};
+	string temp;
+	while (getline(iss, temp)) {
+		rtrim(temp);
+		lines.push_back(temp);
+	}
+	return lines;
+}
+
+#endif

@@ -1,6 +1,6 @@
 #include <vector>
 #include <iostream>
-#include "basic_parser.h"
+#include "basic_parser.hpp"
 
 #define INPUT_NAME "data/day1_input.txt"
 

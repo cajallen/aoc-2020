@@ -4,7 +4,7 @@
 #include <iostream>
 #include <algorithm>
 #include <stdexcept>
-#include "basic_parser.h"
+#include "basic_parser.hpp"
 
 #define INPUT_FILE "data/day2_input.txt"
 

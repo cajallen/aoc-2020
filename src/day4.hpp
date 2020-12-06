@@ -7,7 +7,8 @@
 #include <iostream>
 #include <map>
 #include <algorithm>
-#include "basic_parser.h"
+#include "basic_parser.hpp"
+#include "util_functions.hpp"
 
 #define INPUT_FILE "data/day4_input.txt"
 
@@ -53,7 +54,5 @@ class Passport {
 ostream& operator << (ostream& os, const Passport& passport);
 
 vector<string> parse_to_lines(string input);
-
-bool in_range(int v, int min, int max);
 
 #endif
