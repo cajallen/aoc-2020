@@ -9,6 +9,7 @@ using namespace std;
 
 #define FILE_NAME "data/day5_input.txt"
 
+
 class Seat {
  public:
 	int id = 0;
@@ -28,7 +29,6 @@ class Seat {
 				id |= (1 << bit_pos);
 			}
 		}
-		bitset<10> bs_id(id);
 	}
 
 	int GetRow() const {
@@ -40,26 +40,27 @@ class Seat {
 	}
 };
 
+
 ostream& operator << (ostream& os, const Seat& seat) {
 	os << "row " << seat.GetRow() << ", column " << seat.GetColumn() << ", seat ID " << seat.id;
 	return os;
 }
 
+
 int main() {
 	const int max_seat = 1000;
 
+	// part 1
 	vector<string> lines = parse_list(FILE_NAME, '\n');
 	vector<Seat> seats{};
-
 	int highest_id = 0;
 	for (string line : lines) {
 		seats.push_back(Seat(line));
-		if (seats.back().id > highest_id) {
-			highest_id = seats.back().id;
-		}
+		highest_id = seats.back().id > highest_id ? seats.back().id : highest_id;
 	}
 	cout << "Highest ID: " << highest_id << endl;
 
+	// part 2
 	bool unfilled_seats[max_seat];
 	for (Seat seat : seats) {
 		unfilled_seats[seat.id] = true;
