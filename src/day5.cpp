@@ -1,44 +1,76 @@
-#include <vector>
-#include <string>
-#include <iostream>
-#include <bitset>
-#include <cmath>
-#include "basic_parser.hpp"
+#include "day5.hpp"
 
-using namespace std;
-
-#define FILE_NAME "data/day5_input.txt"
+int main(int a, char** b) {
+	day5::setup();
+	cout << "#1: " << day5::solve1() << endl;
+	cout << "#2: " << day5::solve2() << endl;
+}
 
 
-class Seat {
- public:
-	int id = 0;
-	int rows = 0;
-	int columns = 0;
+namespace day5 {
 
-	Seat(const string line) {
-		for (int i = 0; i < line.length(); i++) {
-			if (line.at(i) == 'F' || line.at(i) == 'B') {
-				rows += 1;
-			} else if (line.at(i) == 'L' || line.at(i) == 'R') {
-				columns += 1;
-			}
 
-			if (line.at(i) == 'B' || line.at(i) == 'R') {
-				int bit_pos = line.length() - 1 - i;
-				id |= (1 << bit_pos);
-			}
+vector<string> lines;
+
+
+void setup() {
+	lines = parse_list(INPUT_FILE5, '\n');
+}
+
+
+int solve1() {
+	int highest_id = 0;
+	for (string line : lines) {
+		Seat seat(line);
+		highest_id = seat.id > highest_id ? seat.id : highest_id;
+	}
+	return highest_id;
+}
+
+
+int solve2() {
+	const int max_seat = 1000;
+	vector<Seat> seats{};
+	bool unfilled_seats[max_seat] = {};
+
+	for (string line : lines) {
+		Seat seat(line);
+		unfilled_seats[seat.id] = true;
+	}
+
+	for (int i = 0; i < max_seat - 2; i++) {
+		if (unfilled_seats[i] && !unfilled_seats[i + 1] && unfilled_seats[i + 2]) {
+			return i + 1;
+		} 
+	}
+}
+
+
+Seat::Seat(const string line) {
+	for (int i = 0; i < line.length(); i++) {
+		if (line.at(i) == 'F' || line.at(i) == 'B') {
+			rows += 1;
+		} else if (line.at(i) == 'L' || line.at(i) == 'R') {
+			columns += 1;
+		}
+
+		if (line.at(i) == 'B' || line.at(i) == 'R') {
+			int bit_pos = line.length() - 1 - i;
+			id |= (1 << bit_pos);
 		}
 	}
+}
 
-	int GetRow() const {
-		return id >> columns;
-	}
-	int GetColumn() const {
-		int mask = (1 << columns) - 1;
-		return id & mask;
-	}
-};
+
+int Seat::GetRow() const {
+	return id >> columns;
+}
+
+
+int Seat::GetColumn() const {
+	int mask = (1 << columns) - 1;
+	return id & mask;
+}
 
 
 ostream& operator << (ostream& os, const Seat& seat) {
@@ -47,27 +79,4 @@ ostream& operator << (ostream& os, const Seat& seat) {
 }
 
 
-int main() {
-	const int max_seat = 1000;
-
-	// part 1
-	vector<string> lines = parse_list(FILE_NAME, '\n');
-	vector<Seat> seats{};
-	int highest_id = 0;
-	for (string line : lines) {
-		seats.push_back(Seat(line));
-		highest_id = seats.back().id > highest_id ? seats.back().id : highest_id;
-	}
-	cout << "#1: Highest ID for: " << highest_id << endl;
-
-	// part 2
-	bool unfilled_seats[max_seat] = {};
-	for (Seat seat : seats) {
-		unfilled_seats[seat.id] = true;
-	}
-	for (int i = 0; i < max_seat - 2; i++) {
-		if (unfilled_seats[i] && !unfilled_seats[i + 1] && unfilled_seats[i + 2]) {
-			cout << "#2: Looks like " << i + 1 << " is unfilled." << endl;
-		} 
-	}
-}
+}  //namespace day5

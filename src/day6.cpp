@@ -1,11 +1,41 @@
-#include <vector>
-#include <string>
-#include <iostream>
-#include "basic_parser.hpp"
-#include "util_functions.hpp"
+#include "day6.hpp"
 
-#define FILE_NAME "data/day6_input.txt"
-#define CHAR_TO_INDEX(c) (int) c - 97
+
+int main(int a, char** b) {
+	day6::setup();
+	cout << "#1: " << day6::solve1() << endl;
+	cout << "#2: " << day6::solve2() << endl;
+}
+
+
+namespace day6 {
+
+
+vector<string> lines;
+
+
+void setup () {
+	lines = parse_double_newline_delimited(INPUT_FILE6);
+}
+
+
+int solve1() {
+	int sum_any = 0;
+	for (string line : lines) {
+		sum_any += count_line_any(line);
+	}
+	return sum_any;
+}
+
+
+int solve2() {
+	int sum_every = 0;
+	for (string line : lines) {
+		sum_every += count_line_every(line);
+	}
+	return sum_every;
+}
+
 
 int count_line_any(const string line) {
 	bool letters[26] = {};
@@ -43,14 +73,5 @@ int count_line_every(const string line) {
 	return count;
 }
 
-int main() {
-	vector<string> lines = parse_double_newline_delimited(FILE_NAME);
-	int sum_any = 0;
-	int sum_every = 0;
-	for (string line : lines) {
-		sum_any += count_line_any(line);
-		sum_every += count_line_every(line);
-	}
-	cout << "#1: any sum: " << sum_any << endl;
-	cout << "#2: every sum: " << sum_every << endl;
-}
+
+}  // namespace day6

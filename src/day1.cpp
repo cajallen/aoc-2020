@@ -1,13 +1,25 @@
-#include <vector>
-#include <iostream>
-#include "basic_parser.hpp"
+#include "day1.hpp"
 
-#define INPUT_NAME "data/day1_input.txt"
 
-using namespace std;
+int main(int a, char** b) {
+	day1::setup();
+	cout << "#1: " << day1::solve1() << endl;
+	cout << "#2: " << day1::solve2() << endl;
+}
 
-int n2approach1() {
-	vector<int> numbers = parse_int_list(INPUT_NAME);
+
+namespace day1 {
+
+
+vector<int> numbers;
+
+
+void setup() {
+	numbers = parse_int_list(INPUT_FILE1);
+}	
+
+
+int solve1() {
 	for (int i = 0; i < numbers.size(); i++) {
 		for (int j = i + 1; j < numbers.size(); j++) {
 			if (numbers[i] + numbers[j] == 2020) {
@@ -18,8 +30,8 @@ int n2approach1() {
 	return -1;
 }
 
-int n2approach2() {
-	vector<int> numbers = parse_int_list(INPUT_NAME);
+
+int solve2() {
 	for (int i = 0; i < numbers.size(); i++) {
 		for (int j = i + 1; j < numbers.size(); j++) {
 			int ij_sum = numbers[i] + numbers[j];
@@ -35,7 +47,5 @@ int n2approach2() {
 	return -1;
 }
 
-int main() {
-	cout << "#1: Answer: " << n2approach1() << endl;
-	cout << "#2: Answer: " << n2approach2() << endl;
-}
+
+}  // namespace day1

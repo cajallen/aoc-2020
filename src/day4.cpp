@@ -1,29 +1,82 @@
 #include "day4.hpp"
 
-int main() {
-	vector<string> lines = parse_double_newline_delimited(INPUT_FILE);
 
-	int part1_passports = 0;
-	int part2_passports = 0;
-	for (string line : lines) {
-		Passport passport(line);
-		if (passport.valid_keys) {
-			part1_passports += 1;
-			if (passport.valid_values) {
-				part2_passports += 1;
-			}
-		}
-	}
-	cout << "#1: Valid passports: " << part1_passports << endl;
-	cout << "#2: Valid passports: " << part2_passports << endl;
+int main(int a, char** b) {
+	day4::setup();
+	cout << "#1: " << day4::solve1() << endl;
+	cout << "#2: " << day4::solve2() << endl;
 }
 
-Passport::Passport(const string line) {
+
+namespace day4 {
+
+
+vector<string> lines;
+map<Key, regex> regex_keys;
+map<Key, regex> regex_rules;
+
+
+void setup() {
+	lines = parse_double_newline_delimited(INPUT_FILE4);
+	regex_keys = map<Key, regex>{
+		{byr, regex("byr:")},
+		{eyr, regex("eyr:")},
+		{iyr, regex("iyr:")},
+		{hgt, regex("hgt:")},
+		{pid, regex("pid:")},
+		{ecl, regex("ecl:")},
+		{hcl, regex("hcl:")},
+		{hgt_unit, regex("hgt:")}
+	};
+
+	regex_rules = map<Key, regex>{
+		{byr, regex("byr:(\\d{4})")},
+		{eyr, regex("eyr:(\\d{4})")},
+		{iyr, regex("iyr:(\\d{4})")},
+		{hgt, regex("hgt:(\\d+)((cm)|(in))")},
+		{pid, regex("pid:(\\d{9})(?!\\d)")},
+		{ecl, regex("ecl:(amb|blu|brn|gry|grn|hzl|oth)")},
+		{hcl, regex("hcl:(#[a-z0-9]{6})")},
+		{hgt_unit, regex("hgt:\\d+((cm)|(in))")}
+	};
+}
+
+
+int solve1() {
+	int passports = 0;
+	for (string line : lines) {
+		Passport passport(line, 1);
+		if (passport.valid_keys) {
+			passports += 1;
+		}
+	}
+	return passports;
+}	
+
+
+int solve2() {
+	int passports = 0;
+	for (string line : lines) {
+		Passport passport(line, 2);
+		if (passport.valid_values) {
+			passports += 1;
+		}
+	}
+	return passports;
+}
+
+
+
+
+
+Passport::Passport(const string line, int part) {
 	smatch matches;
 	for (pair<Key, regex> element : regex_keys) {
 		if (!regex_search(line, regex(element.second))) { return; }
 	}
 	valid_keys = true;
+
+	if (part == 1) { return; }
 
 	for (pair<Key, regex> element : regex_rules) {
 		if (regex_search(line, matches, element.second)) {
@@ -75,3 +128,6 @@ ostream& operator << (ostream& os, const Passport& passport) {
 	os << "}";
 	return os;
 }
+
+
+}  // namespace day4

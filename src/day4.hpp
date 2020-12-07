@@ -1,6 +1,8 @@
 #ifndef DAY4_H_
 #define DAY4_H_
 
+#define INPUT_FILE4 "data/day4_input.txt"
+
 #include <vector>
 #include <string>
 #include <regex>
@@ -9,10 +11,12 @@
 #include <algorithm>
 #include "basic_parser.hpp"
 #include "util_functions.hpp"
-
-#define INPUT_FILE "data/day4_input.txt"
-
 using namespace std;
+
+
+int main(int, char**) __attribute__((weak));
+
+namespace day4 {
 
 enum Key { 
 	byr, 
@@ -25,33 +29,11 @@ enum Key {
 	hgt_unit
 };
 
-map<Key, regex> regex_keys {
-	{byr, regex("byr:")},
-	{eyr, regex("eyr:")},
-	{iyr, regex("iyr:")},
-	{hgt, regex("hgt:")},
-	{pid, regex("pid:")},
-	{ecl, regex("ecl:")},
-	{hcl, regex("hcl:")},
-	{hgt_unit, regex("hgt:")}
-};
-
-map<Key, regex> regex_rules {
-	{byr, regex("byr:(\\d{4})")},
-	{eyr, regex("eyr:(\\d{4})")},
-	{iyr, regex("iyr:(\\d{4})")},
-	{hgt, regex("hgt:(\\d+)((cm)|(in))")},
-	{pid, regex("pid:(\\d{9})(?!\\d)")},
-	{ecl, regex("ecl:(amb|blu|brn|gry|grn|hzl|oth)")},
-	{hcl, regex("hcl:(#[a-z0-9]{6})")},
-	{hgt_unit, regex("hgt:\\d+((cm)|(in))")}
-};
-
 class Passport {
  public:
-	Passport(string line);
+	Passport(const string line, const int part);
 
-	void Set(Key member, string value);
+	void Set(const Key member, const string value);
 
 	long cid_ = -1;
 	long byr_ = -1;
@@ -68,9 +50,12 @@ class Passport {
  private:
 	void validate();
 };
+ostream& operator << (ostream& os, const day4::Passport& passport);
 
-ostream& operator << (ostream& os, const Passport& passport);
+void setup();
+int solve1();
+int solve2();
 
-vector<string> parse_to_lines(string input);
+}  // namespace day4
 
 #endif
