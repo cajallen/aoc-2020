@@ -37,25 +37,28 @@ int solve1() {
 }
 
 int solve2() {
-	// i is the instruction we're trying to change
-	for (uint i = 0; i < instructions.size(); i++) {
+	for (uint swap_index = 0; swap_index < instructions.size(); swap_index++) {
+		if (dynamic_cast<acc*>(instructions[swap_index]) != NULL) { continue; }
+		if (instructions[swap_index]->next_offset == 0) { continue; }
+
 		reset_instructions();
-		if (dynamic_cast<acc*>(instructions[i]) != NULL) { continue; }
-		if (instructions[line_index]->next_offset == 0) { continue; }
 		while (line_index < instructions.size()) {
 			if (instructions[line_index]->executed) { break; }
-			if (line_index == i) {
-				jmp* jmp_p = dynamic_cast<jmp*>(instructions[i]);
-				nop* nop_p = dynamic_cast<nop*>(instructions[i]);
+
+			if (line_index == swap_index) {
+				jmp* jmp_p = dynamic_cast<jmp*>(instructions[line_index]);
+				nop* nop_p = dynamic_cast<nop*>(instructions[line_index]);
 				if (nop_p == NULL) {
 					nop(jmp_p->argument).execute();
 				} else {
 					jmp(nop_p->argument).execute();
 				}
-			} else {
-				instructions[line_index]->execute();
+				continue;
 			}
+
+			instructions[line_index]->execute();
 		}
+		
 		if (line_index >= instructions.size()) {
 			return acc_total;
 		}
