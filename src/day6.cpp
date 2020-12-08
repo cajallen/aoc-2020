@@ -64,7 +64,7 @@ int count_line_every(const string line) {
 		}
 	}
 	int count = 0;
-	int mask = (1 << group_member + 1) - 1;
+	int mask = (1 << (group_member + 1)) - 1;
 	for (int bits : letters) {
 		if (bits == mask) {
 			count += 1;

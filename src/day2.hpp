@@ -23,8 +23,8 @@ namespace day2 {
 
 class Line {
  public:
-	int int1;
-	int int2;
+	uint int1;
+	uint int2;
 	char letter;
 	string password;
 };
@@ -34,9 +34,9 @@ void setup();
 int solve1();
 int solve2();
 
-bool decode(const string inp, Line* line);
-bool test_line1(const string inp);
-bool test_line2(const string inp);
+void decode(const string inp, Line* line);
+bool test_line1(const string inp, bool use_regex = false);
+bool test_line2(const string inp, bool use_regex = false);
 
 }  // namespace day2
 

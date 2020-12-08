@@ -43,11 +43,12 @@ int solve2() {
 			return i + 1;
 		} 
 	}
+	return -1;
 }
 
 
 Seat::Seat(const string line) {
-	for (int i = 0; i < line.length(); i++) {
+	for (uint i = 0; i < line.length(); i++) {
 		if (line.at(i) == 'F' || line.at(i) == 'B') {
 			rows += 1;
 		} else if (line.at(i) == 'L' || line.at(i) == 'R') {

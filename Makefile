@@ -1,4 +1,4 @@
-CXXFLAGS :=
+CXXFLAGS := -O2 -Wall
 DEP := build/basic_parser.o build/util_functions.o
 DAYS = $(wildcard src/day*.cpp)
 BENCHES = $(wildcard src/bench_day*.cpp)
@@ -23,7 +23,7 @@ day%_run:
 	@./build/day$*_
 
 
-day%_x:
+day_%:
 	@make day$*_build --no-print-directory
 	@make day$*_run --no-print-directory
 
@@ -42,3 +42,13 @@ build/%.o: src/%.cpp src/%.hpp
 
 clean:
 	@rm -rf build
+
+
+help:
+	@echo = Advent of Code 2020 =
+	@echo all...........makes and runs all days
+	@echo all_bench.....makes and benchmarks all days
+	@echo bench_day#....makes and benchmarks a day
+	@echo day#_build....builds a day
+	@echo day_#.........builds and runs a day
+	@echo clean.........removes build dir

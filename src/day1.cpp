@@ -12,35 +12,38 @@ namespace day1 {
 
 
 vector<int> numbers;
+bitset<2020> bs_numbers{};
 
 
 void setup() {
 	numbers = parse_int_list(INPUT_FILE1);
+	for (int num : numbers) {
+		bs_numbers[num] = true;
+	}
 }	
 
 
 int solve1() {
-	for (int i = 0; i < numbers.size(); i++) {
-		for (int j = i + 1; j < numbers.size(); j++) {
-			if (numbers[i] + numbers[j] == 2020) {
-				return numbers[i] * numbers[j];
-			}
-		} 
+	for (int x : numbers) {
+		int y = 2020 - x;
+		if (bs_numbers[y]) {
+			return x * y;
+		}
 	}
 	return -1;
 }
 
 
 int solve2() {
-	for (int i = 0; i < numbers.size(); i++) {
-		for (int j = i + 1; j < numbers.size(); j++) {
+	for (uint i = 0; i < numbers.size(); i++) {
+		for (uint j = i + 1; j < numbers.size(); j++) {
 			int ij_sum = numbers[i] + numbers[j];
 			if (ij_sum >= 2020) {
 				continue;	
-			} for (int k = j + 1; k < numbers.size(); k++) {
-				if (ij_sum + numbers[k] == 2020) {
-					return numbers[i] * numbers[j] * numbers[k];
-				}
+			}
+			int k = 2020 - ij_sum;
+			if (bs_numbers[k]) {
+				return numbers[i] * numbers[j] * k;
 			}
 		} 
 	}

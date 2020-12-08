@@ -35,8 +35,8 @@ int solve2() {
 int count_trees(const vector<vector<bool>> grid, const int x_increment, const int y_increment) {
 	int trees = 0;
 
-	int x = 0;
-	int y = 0;
+	uint x = 0;
+	uint y = 0;
 	for (y = 0; y < grid.size(); y += y_increment) {
 		if (grid[y][x % grid[y].size()]) {
 			trees += 1;

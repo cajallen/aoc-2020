@@ -1,7 +1,7 @@
 #include "basic_parser.hpp"
 
 
-static inline void rtrim(string &s) {
+inline void rtrim(string &s) {
     s.erase(s.find_last_not_of(" \n\r\t\f\v") + 1);
 }
 

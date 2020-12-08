@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <iostream>
+#include <bitset>
 #include "basic_parser.hpp"
 using namespace std;
 
