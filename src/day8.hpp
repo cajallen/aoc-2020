@@ -18,10 +18,10 @@ namespace day8 {
 class jmp {
  public:
 	jmp() { }
-    jmp(int arg);
+	jmp(int arg);
 	virtual ~jmp() { }
-    virtual bool execute();
-    int next_offset = 1;
+	virtual bool execute();
+	int next_offset = 1;
 	int argument = 0;
 	bool executed = false;
 };
@@ -29,15 +29,15 @@ class jmp {
 class acc : public jmp {
  public:
 	acc() { }
-    acc(int arg);
+	acc(int arg);
 	~acc() { }
-    bool execute();
+	bool execute();
 };
 
 class nop : public jmp {
  public:
 	nop() { }
-    nop(int arg);
+	nop(int arg);
 	~nop() { }
 };
 
