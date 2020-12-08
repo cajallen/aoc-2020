@@ -50,7 +50,7 @@ class Passport {
  private:
 	void validate();
 };
-ostream& operator << (ostream& os, const day4::Passport& passport);
+ostream& operator << (ostream& os, const Passport& passport);
 
 void setup();
 int solve1();

@@ -6,6 +6,18 @@ inline void rtrim(string &s) {
 }
 
 
+vector<string> split(string line, char delim, bool trim) {
+	string temp;
+	vector<string> results{};
+	istringstream input(line);
+
+	while (getline(input, temp, delim)) {
+		results.push_back(temp);
+	}
+	return results;
+}
+
+
 vector<string> parse_list(const string file_name, char delim) {
 	ifstream input(file_name);
 	string line;
