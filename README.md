@@ -1,5 +1,5 @@
 ### Pre-requisites
-- google benchmark (only for benchmark builds)
+- [google benchmark](https://github.com/google/benchmark) (only for benchmark builds)
 
 
 ### Build Instructions
