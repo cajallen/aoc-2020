@@ -44,6 +44,14 @@ vector<int> parse_int_list(const string file_name) {
 	return vec;
 }
 
+vector<long> parse_long_list(const string file_name) {
+	vector<long> vec{};
+	for (string line : parse_list(file_name)) {
+		vec.push_back(stol(line));
+	}
+	return vec;
+}
+
 
 vector<vector<bool>> parse_bit_grid(const string file_name) {
 	vector<vector<bool>> grid{};

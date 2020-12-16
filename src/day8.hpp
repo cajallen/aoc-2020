@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <bitset>
 #include "basic_parser.hpp"
 
 using namespace std;
@@ -15,38 +14,31 @@ int main(int, char**) __attribute__((weak));
 
 namespace day8 {
 
-class jmp {
+class instr {
  public:
-	jmp() { }
-	jmp(int arg);
-	virtual ~jmp() { }
-	virtual bool execute();
+	instr() { }
+	instr(string line);
+	~instr() { }
+
+	void execute();
+	bool is_acc();
+	bool is_jmp();
+
+	void swap_jmp_nop();
+
+	int argument = -1;
 	int next_offset = 1;
-	int argument = 0;
+	int acc_increase = 0;
 	bool executed = false;
 };
 
-class acc : public jmp {
- public:
-	acc() { }
-	acc(int arg);
-	~acc() { }
-	bool execute();
-};
-
-class nop : public jmp {
- public:
-	nop() { }
-	nop(int arg);
-	~nop() { }
-};
+ostream& operator << (ostream& os, const instr& i);
 
 void setup();
 void teardown();
 int solve1();
 int solve2();
 
-jmp* instruction_factory(string line);
 void reset_instructions();
 
 }

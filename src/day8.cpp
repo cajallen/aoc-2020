@@ -1,64 +1,55 @@
 #include "day8.hpp"
 
+
 int main(int a, char** b) {
 	day8::setup();
 	cout << "#1: " << day8::solve1() << endl;
 	cout << "#2: " << day8::solve2() << endl;
-	day8::teardown();
 }
+
+
 
 namespace day8 {
 
-vector<jmp*> instructions;
+
+vector<instr> instructions;
 uint line_index;
 int acc_total;
 
+
 void setup() {
 	vector<string> lines = parse_list(INPUT_FILE8);
+	instructions = vector<instr>{};
 	for (string line : lines) {
-		instructions.push_back(instruction_factory(line));
+		instructions.push_back(instr(line));
 	}
-}
-
-void teardown() {
-	for (jmp* e : instructions) {
-		delete e;
-	}
-	instructions = vector<jmp*>{};
 }
 
 int solve1() {
 	reset_instructions();
 	while (line_index < instructions.size()) {
-		if (instructions[line_index]->executed) { break; }
-		instructions[line_index]->execute();
+		if (instructions[line_index].executed) { break; }
+		instructions[line_index].execute();
 	}
 	return acc_total;
 }
 
 int solve2() {
 	for (uint swap_index = 0; swap_index < instructions.size(); swap_index++) {
-		if (dynamic_cast<acc*>(instructions[swap_index]) != NULL) { continue; }
-		if (instructions[swap_index]->next_offset == 0) { continue; }
-
+		// set up swap
+		if (instructions[swap_index].argument == 0) { continue; }
+		if (instructions[swap_index].is_acc()) { continue; }
+		instructions[swap_index].swap_jmp_nop();
+		
+		// execute commands
 		reset_instructions();
 		while (line_index < instructions.size()) {
-			if (instructions[line_index]->executed) { break; }
+			if (instructions[line_index].executed) { break; }
 
-			if (line_index == swap_index) {
-				jmp* jmp_p = dynamic_cast<jmp*>(instructions[line_index]);
-				nop* nop_p = dynamic_cast<nop*>(instructions[line_index]);
-				if (nop_p == NULL) {
-					nop(jmp_p->argument).execute();
-				} else {
-					jmp(nop_p->argument).execute();
-				}
-				continue;
-			}
-
-			instructions[line_index]->execute();
+			instructions[line_index].execute();
 		}
-		
+
+		instructions[swap_index].swap_jmp_nop();
 		if (line_index >= instructions.size()) {
 			return acc_total;
 		}
@@ -66,58 +57,49 @@ int solve2() {
 	return -1;
 }
 
+instr::instr(string line) {
+	vector<string> args = split(line, ' ');
+	argument = stoi(args.at(1));
+	if (args.at(0) == "acc") {
+		acc_increase = argument;
+	} else if (args.at(0) == "jmp") {
+		next_offset = argument;
+	}
+}
+
+void instr::execute() {
+	acc_total += acc_increase;
+	line_index += next_offset;
+	executed = true;
+}
+
+bool instr::is_acc() {
+	return acc_increase != 0;
+}
+
+bool instr::is_jmp() {
+	return next_offset != 1;
+}
+
+void instr::swap_jmp_nop() {
+	if (is_jmp()) {
+		next_offset = 1;
+	} else {
+		next_offset = argument;
+	}
+}
 
 void reset_instructions() {
 	line_index = 0;
 	acc_total = 0;
-	for (jmp* jmp_p : instructions) {
-		jmp_p->executed = false;
+	for (uint i = 0; i < instructions.size(); i++) {
+		instructions[i].executed = false;
 	}
 }
 
-
-jmp::jmp(int arg) {
-	next_offset = arg;
-	argument = arg;
+ostream& operator << (ostream& os, const instr& i) {
+	os << "arg:" << i.argument << ", offset:" << i.next_offset << ", acc:" << i.acc_increase << ", exe:" << i.executed;
+	return os;
 }
 
-bool jmp::execute() {
-	line_index += next_offset;
-	executed = true;
-	return true;
-}
-
-acc::acc(int arg) {
-	next_offset = 1;
-	argument = arg;
-}
-
-bool acc::execute() {
-	jmp::execute();
-	acc_total += argument;
-	return true;
-}
-
-nop::nop(int arg) {
-	next_offset = 1;
-	argument = arg;
-}
-
-jmp* instruction_factory(string line) {
-	vector<string> inputs = split(line, ' ');
-	string operation = inputs.at(0);
-	int argument = stoi(inputs.at(1));
-
-	if (operation == "jmp" ) {
-		return new jmp(argument);
-	} else if (operation == "acc") {
-		return new acc(argument);
-	} else if (operation == "nop") {
-		return new nop(argument);
-	} else {
-		throw new invalid_argument("Instruction factory can only make jmp, acc, nop, not " + line);
-	}
-	return new nop(0);
-}
-
-}
+}  // namespace day8

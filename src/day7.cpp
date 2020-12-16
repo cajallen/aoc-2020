@@ -37,7 +37,7 @@ void register_line(const string line) {
 	string inp = line;
 	string key, color;
 	smatch matches;
-	if (regex_search(inp, matches, regex("(\\S+ \\S+) (bags|bag) contain"))) {
+	if (regex_search(inp, matches, regex("^([a-z]+ [a-z]+)"))) {
 		color = matches[1].str();
 		key = color;
 		downwards[key] = set<pair<string, int>>{};
@@ -47,7 +47,7 @@ void register_line(const string line) {
 		throw new invalid_argument("register line called on bad line");
 	}
 
-	while (regex_search(inp, matches, regex("(\\d) (\\S+ \\S+) bag"))) {
+	while (regex_search(inp, matches, regex(" (\\d) ([a-z]+ [a-z]+)"))) {
 		int count = stoi(matches[1].str());
 		color = matches[2].str();
 		if (upwards.find(color) == upwards.end()) {
@@ -84,5 +84,13 @@ int traverse_tree_down(string element_to_visit, set<string> &visited) {
 	}
 	return sum;
 }
+
+
+void register_line(string line) {
+	string temp;
+	istringstream iss(line);
+	while();
+}
+
 
 }  // namespace day7
