@@ -1,12 +1,12 @@
-#include "day7.hpp"
+#include "day07.hpp"
 
 int main(int a, char** b) {
-	day7::setup();
-	cout << "#1: " << day7::solve1() << endl;
-	cout << "#2: " << day7::solve2() << endl;
+	day07::setup();
+	cout << "#1: " << day07::solve1() << endl;
+	cout << "#2: " << day07::solve2() << endl;
 }
 
-namespace day7 {
+namespace day07 {
 
 
 map<string, set<string>> upwards{};
@@ -14,7 +14,7 @@ map<string, set<pair<string, int>>> downwards{};
 
 
 void setup() {
-	vector<string> lines = parse_list<string>(INPUT_FILE7, '\n');
+	vector<string> lines = parse_list<string>(INPUT_FILE07, '\n');
 	for (string line : lines) {
 		register_line(line);
 	}
@@ -77,4 +77,4 @@ int traverse_tree_down(string element_to_visit) {
 }
 
 
-}  // namespace day7
+}  // namespace day07

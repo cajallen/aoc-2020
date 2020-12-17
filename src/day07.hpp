@@ -1,7 +1,7 @@
 #ifndef DAY2_H_
 #define DAY2_H_
 
-#define INPUT_FILE7 "data/day7_input.txt"
+#define INPUT_FILE07 "data/day07_input.txt"
 
 #include <vector>
 #include <string>
@@ -17,7 +17,7 @@ using namespace std;
 
 int main(int, char**) __attribute__((weak));
 
-namespace day7 {
+namespace day07 {
 
 void setup();
 int solve1();
@@ -27,7 +27,7 @@ void register_line(const string line);
 void traverse_tree_up(string element_to_visit, unordered_set<string> &visited);
 int traverse_tree_down(string element_to_visi);
 
-}  // namespace day2
+}  // namespace day02
 
 
 #endif

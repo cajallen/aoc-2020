@@ -1,7 +1,7 @@
 #ifndef DAY5_H_
 #define DAY5_H_
 
-#define INPUT_FILE5 "data/day5_input.txt"
+#define INPUT_FILE05 "data/day05_input.txt"
 
 #include <vector>
 #include <string>
@@ -14,7 +14,7 @@ using namespace std;
 
 int main(int, char**) __attribute__((weak));
 
-namespace day5 {
+namespace day05 {
 
 class Seat {
  public:
@@ -33,6 +33,6 @@ void setup();
 int solve1();
 int solve2();
 
-}  // namespace day5
+}  // namespace day05
 
 #endif

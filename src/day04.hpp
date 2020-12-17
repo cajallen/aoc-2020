@@ -1,7 +1,7 @@
 #ifndef DAY4_H_
 #define DAY4_H_
 
-#define INPUT_FILE4 "data/day4_input.txt"
+#define INPUT_FILE04 "data/day04_input.txt"
 
 #include <vector>
 #include <string>
@@ -16,7 +16,7 @@ using namespace std;
 
 int main(int, char**) __attribute__((weak));
 
-namespace day4 {
+namespace day04 {
 
 enum Key { 
 	byr, 
@@ -56,6 +56,6 @@ void setup();
 int solve1();
 int solve2();
 
-}  // namespace day4
+}  // namespace day04
 
 #endif

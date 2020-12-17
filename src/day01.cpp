@@ -1,14 +1,14 @@
-#include "day1.hpp"
+#include "day01.hpp"
 
 
 int main(int a, char** b) {
-	day1::setup();
-	cout << "#1: " << day1::solve1() << endl;
-	cout << "#2: " << day1::solve2() << endl;
+	day01::setup();
+	cout << "#1: " << day01::solve1() << endl;
+	cout << "#2: " << day01::solve2() << endl;
 }
 
 
-namespace day1 {
+namespace day01 {
 
 
 vector<int> numbers;
@@ -16,7 +16,7 @@ bitset<2020> bs_numbers{};
 
 
 void setup() {
-	numbers = parse_list<int>(INPUT_FILE1);
+	numbers = parse_list<int>(INPUT_FILE01);
 	for (int num : numbers) {
 		bs_numbers[num] = true;
 	}
@@ -51,4 +51,4 @@ int solve2() {
 }
 
 
-}  // namespace day1
+}  // namespace day01

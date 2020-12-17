@@ -1,21 +1,21 @@
-#include "day6.hpp"
+#include "day06.hpp"
 
 
 int main(int a, char** b) {
-	day6::setup();
-	cout << "#1: " << day6::solve1() << endl;
-	cout << "#2: " << day6::solve2() << endl;
+	day06::setup();
+	cout << "#1: " << day06::solve1() << endl;
+	cout << "#2: " << day06::solve2() << endl;
 }
 
 
-namespace day6 {
+namespace day06 {
 
 
 vector<string> lines;
 
 
 void setup () {
-	lines = parse_double_newline_delimited(INPUT_FILE6);
+	lines = parse_double_newline_delimited(INPUT_FILE06);
 }
 
 
@@ -74,4 +74,4 @@ int count_line_every(const string line) {
 }
 
 
-}  // namespace day6
+}  // namespace day06

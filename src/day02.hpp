@@ -1,7 +1,7 @@
 #ifndef DAY2_H_
 #define DAY2_H_
 
-#define INPUT_FILE2 "data/day2_input.txt"
+#define INPUT_FILE02 "data/day02_input.txt"
 #define POS1_I 1
 #define POS2_I 2
 #define CHAR_I 3
@@ -19,7 +19,7 @@ using namespace std;
 
 int main(int, char**) __attribute__((weak));
 
-namespace day2 {
+namespace day02 {
 
 class Line {
  public:
@@ -38,7 +38,7 @@ void decode(const string inp, Line* line);
 bool test_line1(const string inp, bool use_regex = false);
 bool test_line2(const string inp, bool use_regex = false);
 
-}  // namespace day2
+}  // namespace day02
 
 
 #endif

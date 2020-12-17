@@ -1,15 +1,15 @@
-#include "day8.hpp"
+#include "day08.hpp"
 
 
 int main(int a, char** b) {
-	day8::setup();
-	cout << "#1: " << day8::solve1() << endl;
-	cout << "#2: " << day8::solve2() << endl;
+	day08::setup();
+	cout << "#1: " << day08::solve1() << endl;
+	cout << "#2: " << day08::solve2() << endl;
 }
 
 
 
-namespace day8 {
+namespace day08 {
 
 
 vector<instr> instructions;
@@ -18,7 +18,7 @@ int acc_total;
 
 
 void setup() {
-	vector<string> lines = parse_list<string>(INPUT_FILE8);
+	vector<string> lines = parse_list<string>(INPUT_FILE08);
 	instructions = vector<instr>{};
 	for (string line : lines) {
 		instructions.push_back(instr(line));
@@ -102,4 +102,4 @@ ostream& operator << (ostream& os, const instr& i) {
 	return os;
 }
 
-}  // namespace day8
+}  // namespace day08

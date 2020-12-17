@@ -1,20 +1,20 @@
-#include "day5.hpp"
+#include "day05.hpp"
 
 int main(int a, char** b) {
-	day5::setup();
-	cout << "#1: " << day5::solve1() << endl;
-	cout << "#2: " << day5::solve2() << endl;
+	day05::setup();
+	cout << "#1: " << day05::solve1() << endl;
+	cout << "#2: " << day05::solve2() << endl;
 }
 
 
-namespace day5 {
+namespace day05 {
 
 
 vector<string> lines;
 
 
 void setup() {
-	lines = parse_list<string>(INPUT_FILE5, '\n');
+	lines = parse_list<string>(INPUT_FILE05, '\n');
 }
 
 
@@ -80,4 +80,4 @@ ostream& operator << (ostream& os, const Seat& seat) {
 }
 
 
-}  //namespace day5
+}  //namespace day05

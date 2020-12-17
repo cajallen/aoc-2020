@@ -1,20 +1,20 @@
-#include "day9.hpp"
+#include "day09.hpp"
 
 int main(int a, char** b) {
-	day9::setup();
-	cout << "#1: " << day9::solve1() << endl;
-	cout << "#2: " << day9::solve2() << endl;
+	day09::setup();
+	cout << "#1: " << day09::solve1() << endl;
+	cout << "#2: " << day09::solve2() << endl;
 }
 
 
-namespace day9 {
+namespace day09 {
 
 
 vector<long> numbers;
 
 
 void setup() {
-	numbers = parse_list<long>(INPUT_FILE9);
+	numbers = parse_list<long>(INPUT_FILE09);
 }
 
 int solve1() {

@@ -1,14 +1,14 @@
-#include "day4.hpp"
+#include "day04.hpp"
 
 
 int main(int a, char** b) {
-	day4::setup();
-	cout << "#1: " << day4::solve1() << endl;
-	cout << "#2: " << day4::solve2() << endl;
+	day04::setup();
+	cout << "#1: " << day04::solve1() << endl;
+	cout << "#2: " << day04::solve2() << endl;
 }
 
 
-namespace day4 {
+namespace day04 {
 
 
 vector<string> lines;
@@ -17,7 +17,7 @@ map<Key, regex> regex_rules;
 
 
 void setup() {
-	lines = parse_double_newline_delimited(INPUT_FILE4);
+	lines = parse_double_newline_delimited(INPUT_FILE04);
 	regex_keys = map<Key, regex>{
 		{byr, regex("byr:")},
 		{eyr, regex("eyr:")},
@@ -130,4 +130,4 @@ ostream& operator << (ostream& os, const Passport& passport) {
 }
 
 
-}  // namespace day4
+}  // namespace day04

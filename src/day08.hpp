@@ -1,7 +1,7 @@
 #ifndef DAY_8_
 #define DAY_8_
 
-#define INPUT_FILE8 "data/day8_input.txt"
+#define INPUT_FILE08 "data/day08_input.txt"
 
 #include <string>
 #include <vector>
@@ -12,7 +12,7 @@ using namespace std;
 
 int main(int, char**) __attribute__((weak));
 
-namespace day8 {
+namespace day08 {
 
 class instr {
  public:

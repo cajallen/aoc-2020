@@ -1,21 +1,21 @@
-#include "day3.hpp"
+#include "day03.hpp"
 
 
 int main(int a, char** b) {
-	day3::setup();
-	cout << "#1: " << day3::solve1() << endl;
-	cout << "#2: " << day3::solve2() << endl;
+	day03::setup();
+	cout << "#1: " << day03::solve1() << endl;
+	cout << "#2: " << day03::solve2() << endl;
 }
 
 
-namespace day3 {
+namespace day03 {
 
 
 vector<vector<bool>> grid;
 
 
 void setup() {
-	grid = parse_bit_grid(INPUT_FILE3);
+	grid = parse_bit_grid(INPUT_FILE03);
 }
 
 int solve1() {
@@ -47,4 +47,4 @@ int count_trees(const vector<vector<bool>> grid, const int x_increment, const in
 }
 
 
-}  // namespace day3
+}  // namespace day03
