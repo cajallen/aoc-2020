@@ -16,20 +16,19 @@ map<string, set<pair<string, int>>> downwards{};
 void setup() {
 	vector<string> lines = parse_list(INPUT_FILE7, '\n');
 	for (string line : lines) {
-		day7::register_line(line);
+		register_line(line);
 	}
 }
 
 int solve1() {
-	set<string> visited{};
+	unordered_set<string> visited{};
 	traverse_tree_up("shiny gold", visited);
 	return visited.size() - 1;
 }
 
 
 int solve2() {
-	set<string> visited{};
-	return traverse_tree_down("shiny gold", visited);
+	return traverse_tree_down("shiny gold");
 }	
 
 
@@ -60,36 +59,21 @@ void register_line(const string line) {
 	}
 }
 
-void traverse_tree_up(string element_to_visit, set<string> &visited) {
-	if (visited.find(element_to_visit) != visited.end()) {
-		cout << "Element " << element_to_visit << " has already been visited" << endl;
-		throw new invalid_argument("element should not already be visited");
-	} 
+void traverse_tree_up(string element_to_visit, unordered_set<string> &visited) {
 	visited.insert(element_to_visit);
-	set<string> neighbors = upwards[element_to_visit];
-	for (string neighbor : neighbors) {
-		if (visited.find(neighbor) == visited.end()) {
-			traverse_tree_up(neighbor, visited);
-		} 
+	for (string neighbor : upwards[element_to_visit]) {
+		if (visited.count(neighbor) != 0) { continue; }
+		traverse_tree_up(neighbor, visited);
 	}
 }
 
-int traverse_tree_down(string element_to_visit, set<string> &visited) {
-	visited.insert(element_to_visit);
-	set<pair<string, int>> neighbors = downwards[element_to_visit];
+int traverse_tree_down(string element_to_visit) {
 	int sum = 0;
-	for (pair<string, int> neighbor : neighbors) {
+	for (pair<string, int> neighbor : downwards[element_to_visit]) {
 		sum += neighbor.second;
-		sum += neighbor.second * traverse_tree_down(neighbor.first, visited);
+		sum += neighbor.second * traverse_tree_down(neighbor.first);
 	}
 	return sum;
-}
-
-
-void register_line(string line) {
-	string temp;
-	istringstream iss(line);
-	while();
 }
 
 

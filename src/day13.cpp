@@ -19,7 +19,9 @@ void setup() {
     rem = vector<int>{};
 }
 
-int solve1(int estimate = 1000434, vector<int> busses = num) {
+long solve1() {
+	/*
+	int estimate = 92130912;
 	int soonest_i = 0;
 	int soonest_eta = busses[0] - estimate % busses[0];
 	for (uint i = 1; i < busses.size(); i++) { 
@@ -30,6 +32,7 @@ int solve1(int estimate = 1000434, vector<int> busses = num) {
 		}
 	}
 	return soonest_eta * busses[soonest_i];
+	*/
 }
 
 long solve2() {

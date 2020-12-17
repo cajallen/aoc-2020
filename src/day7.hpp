@@ -8,6 +8,7 @@
 #include <regex>
 #include <iostream>
 #include <set>
+#include <unordered_set>
 #include <map>
 #include <exception>
 #include "basic_parser.hpp"
@@ -23,8 +24,8 @@ int solve1();
 int solve2();
 
 void register_line(const string line);
-void traverse_tree_up(string element_to_visit, set<string> &visited);
-int traverse_tree_down(string element_to_visit, set<string> &visited);
+void traverse_tree_up(string element_to_visit, unordered_set<string> &visited);
+int traverse_tree_down(string element_to_visi);
 
 }  // namespace day2
 
