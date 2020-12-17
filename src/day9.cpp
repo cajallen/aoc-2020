@@ -14,7 +14,7 @@ vector<long> numbers;
 
 
 void setup() {
-	numbers = parse_long_list(INPUT_FILE9);
+	numbers = parse_list<long>(INPUT_FILE9);
 }
 
 int solve1() {

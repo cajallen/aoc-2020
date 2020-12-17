@@ -15,7 +15,7 @@ vector<string> lines;
 
 
 void setup() {
-	lines = parse_list(INPUT_FILE2);
+	lines = parse_list<string>(INPUT_FILE2);
 }
 
 

@@ -18,7 +18,7 @@ int acc_total;
 
 
 void setup() {
-	vector<string> lines = parse_list(INPUT_FILE8);
+	vector<string> lines = parse_list<string>(INPUT_FILE8);
 	instructions = vector<instr>{};
 	for (string line : lines) {
 		instructions.push_back(instr(line));

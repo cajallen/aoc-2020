@@ -5,7 +5,7 @@ int main(int a, char** b) {
 	day15::setup();
 	cout << "#1: " << day15::solve1() << endl;
 	cout << "#2: " << day15::solve2() << endl;
-	return 1;
+	return 0;
 }
 
 

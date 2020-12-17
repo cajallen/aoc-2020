@@ -17,7 +17,7 @@ void setup() {
     one_sequences.clear();
 	seq_poss_combinations.clear();
 
-	vector<int> adapters = parse_int_list(INPUT_FILE10);
+	vector<int> adapters = parse_list<int>(INPUT_FILE10);
 	adapters.push_back(0);
 	sort(adapters.begin(), adapters.end());
 	adapters.push_back(adapters.back() + 3);

@@ -6,7 +6,7 @@ int main(int a, char** b) {
     day13::setup();
     cout << "#1: " << day13::solve1() << endl;
 	cout << "#2: " << day13::solve2() << endl;
-    return 1;
+    return 0;
 }
 
 namespace day13 {
@@ -15,8 +15,8 @@ vector<int> num;
 vector<int> rem;
 
 void setup() {
-    num = vector<int>{17,41,983,29,19,23,397,37,13};
-    rem = vector<int>{};
+    //num = vector<int>{17,41,983,29,19,23,397,37,13};
+    //rem = vector<int>{0,7,11,17,5};
 }
 
 long solve1() {
@@ -33,10 +33,13 @@ long solve1() {
 	}
 	return soonest_eta * busses[soonest_i];
 	*/
+	return 0;
 }
 
 long solve2() {
+	/*
 	return find_min(num, rem);
+	*/
 }
 
 int inv(int input, int mod_0) {

@@ -14,7 +14,7 @@ map<string, set<pair<string, int>>> downwards{};
 
 
 void setup() {
-	vector<string> lines = parse_list(INPUT_FILE7, '\n');
+	vector<string> lines = parse_list<string>(INPUT_FILE7, '\n');
 	for (string line : lines) {
 		register_line(line);
 	}

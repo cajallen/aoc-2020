@@ -16,7 +16,7 @@ bitset<2020> bs_numbers{};
 
 
 void setup() {
-	numbers = parse_int_list(INPUT_FILE1);
+	numbers = parse_list<int>(INPUT_FILE1);
 	for (int num : numbers) {
 		bs_numbers[num] = true;
 	}

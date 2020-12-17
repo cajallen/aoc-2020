@@ -18,7 +18,7 @@ Grid grid;
 
 void setup() {
 	grid = Grid();
-	vector<string> lines = parse_list(INPUT_FILE11);
+	vector<string> lines = parse_list<string>(INPUT_FILE11);
 	grid.width = lines.front().size();
 	grid.height = lines.size();
 	for (string line : lines) {
